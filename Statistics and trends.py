@@ -26,4 +26,6 @@ def dataFrame(file_name):
 a,b = dataFrame("API_EN.ATM.CO2E.LF.KT_DS2_en_csv_v2_4538194.csv")
 print(a)
 print(b)
-
+c,d = a,b = dataFrame("API_EG.ELC.ACCS.ZS_DS2_en_csv_v2_4695288.csv")
+print(c)
+print(d)
