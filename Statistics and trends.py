@@ -11,24 +11,31 @@ import scipy as sts
 
 def dataFrame(file_name):
     df= pd.read_csv(file_name, skiprows=4)
-   # df= df.drop(df.iloc[:, -6:],axis=1)
-    a = df['Country Name']
+    years = [34,39,44,49,54,59,64]
+    countries=[1]
+    def group_f(col, value, years, countries):
+        df1=df.groupby("Indicator Name", group_keys= True)
+        df1= df1.get_group("Urban population")
+        df1 = df1.reset_index()
+        a = df1['Country Name']
+        df1= df1.iloc[:,years]
+        df1.insert(loc=0, column='Country Name', value=a)
+        df2 = df1.set_index('Country Name').T
+        return df1,df2
+    df1,df2 = group_f("Indicator Name","Urban population",years,countries)
+    #a = df['Country Name']
     #print(a)
-    df= df.iloc[8:18, 45:55]
-    df.insert(loc=0, column='Country Name', value=a)
+    #df= df.iloc[15:20, 50:55]
+    #df.insert(loc=0, column='Country Name', value=a)
     #df['Country Name']= a
-    df= df.dropna(axis = 0)
-   # print(df)
-    df1 = df.set_index('Country Name').T
-    #print(df1)
-    return df, df1
+    #df= df.dropna(axis = 1)
+    #df1 = df.set_index('Country Name').T
+    return df1,df2
 
-a,b = dataFrame("API_EN.ATM.CO2E.LF.KT_DS2_en_csv_v2_4538194.csv")
+a,b = dataFrame("API_19_DS2_en_csv_v2_4700503.csv")
 print(a)
 print(b)
-c,d = dataFrame("API_EG.ELC.ACCS.ZS_DS2_en_csv_v2_4695288.csv")
-print(c)
-print(d)
+
 def Bar_p(value_x, value_y):
     a.plot.bar(x = value_x,
                     y= value_y,
