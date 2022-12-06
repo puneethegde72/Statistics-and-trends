@@ -36,8 +36,8 @@ print("Forest country\n",Green_gas_c)
 print("Forest Year/n",Green_gas_y)
 
 
-def plot_p(DataFrame, col, types):
-    DataFrame.plot(x=col,rot=45,figsize=(20,10),kind= types)
+def plot_p(DataFrame, col, types,name):
+    DataFrame.plot(x=col,rot=45,figsize=(20,10),kind= types, title= name)
     return
-plot_p(Urban_population_c,"Country Name","bar")
-plot_p(Green_gas_c,"Country Name","bar")
+plot_p(Urban_population_c,"Country Name","bar","Urban population")
+plot_p(Green_gas_c,"Country Name","bar","Total greenhouse gas emissions (kt of CO2 equivalent)")
