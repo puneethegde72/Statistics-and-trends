@@ -36,12 +36,8 @@ print("Forest country\n",Green_gas_c)
 print("Forest Year/n",Green_gas_y)
 
 
-'''
-def Bar_p(value_x, value_y):
-    a.plot.bar(x = value_x,
-                    y= value_y,
-                    colormap='viridis', legend=True, figsize=(15,8), rot=45 )
+def plot_p(DataFrame, col, types):
+    DataFrame.plot(x=col,rot=45,figsize=(20,10),kind= types)
     return
-a["Average"] = a.mean(axis = 1,numeric_only= True)
-Bar_p("Country Name", "Average")
-'''
+plot_p(Urban_population_c,"Country Name","bar")
+plot_p(Green_gas_c,"Country Name","bar")
