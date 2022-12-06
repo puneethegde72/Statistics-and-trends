@@ -11,31 +11,24 @@ import scipy as sts
 
 def dataFrame(file_name):
     df= pd.read_csv(file_name, skiprows=4)
-    years = [34,39,44,49,54,59,64]
-    countries=[1]
+    years = [35,40,45,50,55,5,64]
+    countries=[2,35,55,81,109,119,202,205,251]
     def group_f(col, value, years, countries):
         df1=df.groupby("Indicator Name", group_keys= True)
         df1= df1.get_group("Urban population")
         df1 = df1.reset_index()
         a = df1['Country Name']
-        df1= df1.iloc[:,years]
+        df1= df1.iloc[countries,years]
         df1.insert(loc=0, column='Country Name', value=a)
         df2 = df1.set_index('Country Name').T
         return df1,df2
     df1,df2 = group_f("Indicator Name","Urban population",years,countries)
-    #a = df['Country Name']
-    #print(a)
-    #df= df.iloc[15:20, 50:55]
-    #df.insert(loc=0, column='Country Name', value=a)
-    #df['Country Name']= a
-    #df= df.dropna(axis = 1)
-    #df1 = df.set_index('Country Name').T
-    return df1,df2
+    df3, df4 = group_f("Indicator Name","Forest area (sq. km)",years,countries)
+    return df1,df2,df3,df4
 
-a,b = dataFrame("API_19_DS2_en_csv_v2_4700503.csv")
-print(a)
-print(b)
+Urban_population_c,Urban_population_y,forest_c,Forest_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv")
 
+'''
 def Bar_p(value_x, value_y):
     a.plot.bar(x = value_x,
                     y= value_y,
@@ -43,3 +36,4 @@ def Bar_p(value_x, value_y):
     return
 a["Average"] = a.mean(axis = 1,numeric_only= True)
 Bar_p("Country Name", "Average")
+'''
