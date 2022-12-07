@@ -12,7 +12,9 @@ import scipy as sts
 def dataFrame(file_name):
     df= pd.read_csv(file_name, skiprows=4)
     years = [35,40,45,50,55,60,64]
-    countries=[2,35,55,81,109,119,202,205,251]
+    countries=[35,40,55,81,109,119,202,205,251]
+    row = [1,2,3]
+    y_indicator= [3, 35, 40, 45, 50, 55, 60, 64]
     def group_f(col, value1, years, countries):
         df1=df.groupby(col, group_keys= True)
         df1= df1.get_group(value1)
@@ -25,19 +27,23 @@ def dataFrame(file_name):
         return df1,df2
     df1,df2 = group_f("Indicator Name","Urban population",years,countries)
     df3, df4 = group_f("Indicator Name","Total greenhouse gas emissions (kt of CO2 equivalent)",years,countries)
-    return df1,df2,df3,df4
+    df5,df6 = group_f("Country Name","China",y_indicator,row)
+    return df1,df2,df3,df4,df5,df6
 
-Urban_population_c,Urban_population_y,Green_gas_c,Green_gas_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv")
+Urban_population_c,Urban_population_y,Green_gas_c,Green_gas_y, china_hm, China_ht = dataFrame("API_19_DS2_en_csv_v2_4700503.csv")
 print("Urban_population country\n",Urban_population_c)
 print("Urban_population year\n",Urban_population_y)
 
-print("Forest country\n",Green_gas_c)
+print("Green_gas\n",Green_gas_c)
 
-print("Forest Year/n",Green_gas_y)
+print("Green_gas\n",Green_gas_y)
 
 
-def plot_p(DataFrame, col, types,name):
-    DataFrame.plot(x=col,rot=45,figsize=(20,10),kind= types, title= name)
+def plot_p(DataFrame, col, types, name):
+    DataFrame.plot(x=col, rot=45, figsize=(20,10), kind= types, title= name)
     return
 plot_p(Urban_population_c,"Country Name","bar","Urban population")
-plot_p(Green_gas_c,"Country Name","bar","Total greenhouse gas emissions (kt of CO2 equivalent)")
+plot_p(Green_gas_c,"Country Name", "bar","Total greenhouse gas emissions (kt of CO2 equivalent)")
+
+Urban_population_y.plot(figsize=(20,10),kind="line")
+Green_gas_y.plot(figsize=(20,10),kind="line")
