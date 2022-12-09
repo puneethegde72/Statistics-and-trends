@@ -37,17 +37,27 @@ def dataFrame(file_name,years,countries,col, value1):
     df5, df6 = group_f("Indicator Name","CO2 emissions (kt)",years,countries)
     return df1,df2,df3,df4,df5,df6
 '''
+def stats_f(file_name,years,col, value1):
+    df= pd.read_csv(file_name, skiprows=4)
+    df1=df.groupby(col, group_keys= True)
+    df1= df1.get_group(value1)
+    df1 = df1.reset_index()
+    df1= df1.iloc[:,years]
+    #df1.insert(loc=0, column='Country Name', value=a)
+    #df1.to_csv("C:/Users/Puneet/OneDrive/Documents/india.csv")
+    df1= df1.dropna(axis = 0)
+    df1= df1.dropna(axis = 1)
+    df2 = df1.set_index("Indicator Name").T
+    #df2.columns=df2.iloc[0]
+    return df2
+
 years = [35,40,45,50,55,60,64]
 countries=[35,40,55,81,109,119,202,205,251]
 population_c,population_y =dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Population, total")
 Green_gas_c,Green_gas_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Total greenhouse gas emissions (kt of CO2 equivalent)")
 co2_c,co2_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","CO2 emissions (kt)")
-print("Urban_population country\n",population_c)
-print("Urban_population year\n",population_y)
-
-print("Green_gas\n",Green_gas_c)
-
-print("Green_gas\n",Green_gas_y)
+india = stats_f("API_19_DS2_en_csv_v2_4700503.csv",[3,35,40,45,50,55,60,64],"Country Name","India")
+print("india/n", india)
 
 
 
