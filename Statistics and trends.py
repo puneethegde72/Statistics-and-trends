@@ -39,11 +39,11 @@ def dataFrame(file_name,years,countries,col, value1):
 '''
 years = [35,40,45,50,55,60,64]
 countries=[35,40,55,81,109,119,202,205,251]
-Urban_population_c,Urban_population_y =dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Urban population")
+population_c,population_y =dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Population, total")
 Green_gas_c,Green_gas_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Total greenhouse gas emissions (kt of CO2 equivalent)")
 co2_c,co2_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","CO2 emissions (kt)")
-print("Urban_population country\n",Urban_population_c)
-print("Urban_population year\n",Urban_population_y)
+print("Urban_population country\n",population_c)
+print("Urban_population year\n",population_y)
 
 print("Green_gas\n",Green_gas_c)
 
@@ -54,8 +54,8 @@ print("Green_gas\n",Green_gas_y)
 def plot_p(DataFrame, col, types, name):
     DataFrame.plot(x=col, rot=45, figsize=(20,10), kind= types, title= name)
     return
-plot_p(Urban_population_c,"Country Name","bar","Urban population")
+plot_p(population_c,"Country Name","bar","Total population")
 plot_p(Green_gas_c,"Country Name", "bar","Total greenhouse gas emissions (kt of CO2 equivalent)")
 
-Urban_population_y.plot(figsize=(20,10),kind="line",title="Urban population")
+population_y.plot(figsize=(20,10),kind="line",title="Total population")
 co2_y.plot(figsize=(20,10),kind="line",title="Total Co2 Emission")
