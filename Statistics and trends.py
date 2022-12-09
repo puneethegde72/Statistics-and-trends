@@ -81,3 +81,10 @@ plt.imshow( india.corr(), interpolation = 'nearest',cmap="GnBu")
 plt.title('HeatMap Using Matplotlib Library')
 plt.tight_layout()
 plt.show()
+
+
+plt.figure()
+plt.contourf(india.corr(), interpolation = 'nearest',cmap="GnBu")
+plt.title('HeatMap Using Matplotlib Library')
+plt.tight_layout()
+plt.show()
