@@ -8,6 +8,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import scipy as sts
+import plotly.express as px
+import seaborn as sns
 
 def dataFrame(file_name,years,countries,col, value1):
     df= pd.read_csv(file_name, skiprows=4)
@@ -75,7 +77,35 @@ india = india.loc[:,["Population, total","Urban population","Foreign direct inve
 print(india)
 
 print(india.corr())
+'''
+india.corr(). style. background_gradient (cmap = 'GnBu')
 
-correlation = india. corr ()
-correlation. style. background_gradient (cmap = 'BrBG')
+plt.figure(figsize=(50,25))
+plt.imshow( india.corr(), interpolation = 'nearest',cmap="GnBu");
 
+plt.title('Heat map for India',fontsize=46)
+plt.xticks([0, 1, 2,3,4], ["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","Cereal yield (kg per hectare)","CO2 emissions (kt)"],rotation=90,fontsize=46)
+plt.yticks([0, 1, 2,3,4], ["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","Cereal yield (kg per hectare)","CO2 emissions (kt)"],fontsize=46)
+plt.show()
+'''
+fig, ax = plt.subplots( figsize=(10,10))
+im = ax.imshow(india.corr())
+cbar = ax.figure.colorbar(im,
+                          ax = ax,
+                          shrink=0.5 )
+x=["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)", "Cereal yield (kg per hectare)","CO2 emissions (kt)"]
+# add tick labels
+ax.set_xticks(np.arange(len(x)),
+              labels=x,
+              size=12)
+ax.set_yticks(np.arange(len(x)),
+              labels=x,size=12)
+# Rotate the tick labels to be more legible
+plt.setp(ax.get_xticklabels(),
+         rotation = 45,
+         ha = "right",
+         rotation_mode = "anchor")
+ax.set_title("Flights Data Seaborn", size=20)
+fig.tight_layout()
+plt.savefig("how_to_make_a_heatmap_with_matplotlib_Python.png",
+                    format='png',dpi=150)
