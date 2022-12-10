@@ -105,7 +105,7 @@ plt.setp(ax.get_xticklabels(),
          rotation = 45,
          ha = "right",
          rotation_mode = "anchor")
-ax.set_title("Flights Data Seaborn", size=20)
+ax.set_title("India's Heatmap", size=20)
 fig.tight_layout()
 plt.savefig("how_to_make_a_heatmap_with_matplotlib_Python.png",
                     format='png',dpi=150)
