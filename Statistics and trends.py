@@ -58,13 +58,16 @@ plt.savefig('Total population.jpg')
 plot_p(Green_gas_c,"Country Name", "bar","Total greenhouse gas emissions (kt of CO2 equivalent)")
 plt.savefig('Total greenhouse gas emissions.jpg')
 
-ax1 = Up_y.plot(figsize=(50,25),kind="line",fontsize=36)
+legend_properties = {'weight':'bold','size':36}
+ax1 = Up_y.plot(figsize=(50,25),kind="line",fontsize=36,linewidth=4.0)
 ax1.set_title("Total Urban population",pad=20, fontdict={'fontsize':40})
-ax1.legend(loc=2,fontsize=26)
+ax1.legend(loc=2,prop=legend_properties)
 plt.savefig('Total Urban population line.jpg')
-ax2 = co2_y.plot(figsize=(50,25),kind="line",fontsize=36)
-ax2.set_title("Total Co2 Emission",pad=20, fontdict={'fontsize':40})
-ax2.legend(fontsize=36)
+
+
+ax2 = co2_y.plot(figsize=(50,25),kind="line",fontsize=36,linewidth=4.0)
+ax2.set_title("Total Co2 Emission",pad=30, fontdict={'fontsize':40})
+ax2.legend(prop=legend_properties)
 plt.savefig('Total Co2 Emission line.jpg')
 """
 Up_y.plot(figsize=(20,10),kind="line",title="Total Urban Population")
