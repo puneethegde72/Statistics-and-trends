@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import scipy as sts
 import plotly.express as px
 import seaborn as sns
-
+"""Readng manupulating file and returning a dataframe and transpose of the dataframe"""
 def dataFrame(file_name,years,countries,col, value1):
     df= pd.read_csv(file_name, skiprows=4)
     df1=df.groupby(col, group_keys= True)
@@ -22,23 +22,7 @@ def dataFrame(file_name,years,countries,col, value1):
     df1= df1.dropna(axis = 1)
     df2 = df1.set_index('Country Name').T
     return df1,df2
-'''
-    def group_f(col, value1, years, countries):
-        df1=df.groupby(col, group_keys= True)
-        df1= df1.get_group(value1)
-        df1 = df1.reset_index()
-        a = df1['Country Name']
-        df1= df1.iloc[countries,years]
-        df1.insert(loc=0, column='Country Name', value=a)
-        df1= df1.dropna(axis = 1)
-        df2 = df1.set_index('Country Name').T
-        return df1,df2
 
-    df1,df2 = group_f("Indicator Name","Urban population",years,countries)
-    df3, df4 = group_f("Indicator Name","Total greenhouse gas emissions (kt of CO2 equivalent)",years,countries)
-    df5, df6 = group_f("Indicator Name","CO2 emissions (kt)",years,countries)
-    return df1,df2,df3,df4,df5,df6
-'''
 def stats_f(file_name,years,col, value1):
     df= pd.read_csv(file_name, skiprows=4)
     df1=df.groupby(col, group_keys= True)
