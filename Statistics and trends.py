@@ -71,20 +71,11 @@ population_y.plot(figsize=(20,10),kind="line",title="Total population")
 co2_y.plot(figsize=(20,10),kind="line",title="Total Co2 Emission")
 
 india.corr()
-india = india.loc[:,["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","Mortality rate, under-5 (per 1,000 live births)","Cereal yield (kg per hectare)","CO2 emissions (kt)"] ]
+india = india.loc[:,["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)", "Cereal yield (kg per hectare)","CO2 emissions (kt)"] ]
 print(india)
-india.corr()
-india.corr().style.background_gradient(cmap="YlOrBr")
 
-plt.figure()
-plt.imshow( india.corr(), interpolation = 'nearest',cmap="GnBu")
-plt.title('HeatMap Using Matplotlib Library')
-plt.tight_layout()
-plt.show()
+print(india.corr())
 
+correlation = india. corr ()
+correlation. style. background_gradient (cmap = 'BrBG')
 
-plt.figure()
-plt.contourf(india.corr(), interpolation = 'nearest',cmap="GnBu")
-plt.title('HeatMap Using Matplotlib Library')
-plt.tight_layout()
-plt.show()
