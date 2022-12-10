@@ -71,7 +71,7 @@ Up_y.plot(figsize=(20,10),kind="line",title="Total Urban Population")
 co2_y.plot(figsize=(20,10),kind="line",title="Total Co2 Emission")
 """
 india.corr()
-india = india.loc[:,["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)", "Cereal yield (kg per hectare)","CO2 emissions (kt)"] ]
+india = india.loc[:,["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)", "CO2 emissions (kt)"] ]
 print(india)
 
 print(india.corr())
@@ -87,11 +87,11 @@ plt.yticks([0, 1, 2,3,4], ["Population, total","Urban population","Foreign direc
 plt.show()
 '''
 fig, ax = plt.subplots( figsize=(10,10))
-im = ax.imshow(india.corr())
+im = ax.imshow(india.corr(),cmap="YlOrBr")
 cbar = ax.figure.colorbar(im,
                           ax = ax,
                           shrink=0.5 )
-x=["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)", "Cereal yield (kg per hectare)","CO2 emissions (kt)"]
+x=["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","CO2 emissions (kt)"]
 # add tick labels
 ax.set_xticks(np.arange(len(x)),
               labels=x,
@@ -105,5 +105,5 @@ plt.setp(ax.get_xticklabels(),
          rotation_mode = "anchor")
 ax.set_title("India's Heatmap", size=20)
 fig.tight_layout()
-plt.savefig("how_to_make_a_heatmap_with_matplotlib_Python.png",
+plt.savefig("inda's Heatmap.png",
                     format='png',dpi=150)
