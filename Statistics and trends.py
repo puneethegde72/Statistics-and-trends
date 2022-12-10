@@ -42,6 +42,7 @@ countries=[35,40,55,81,109,119,202,205,251]
 population_c,population_y =dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Population, total")
 Green_gas_c,Green_gas_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Total greenhouse gas emissions (kt of CO2 equivalent)")
 co2_c,co2_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","CO2 emissions (kt)")
+gdp_c,gdp_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Foreign direct investment, net inflows (% of GDP)")
 india = stats_f("API_19_DS2_en_csv_v2_4700503.csv",[3,35,40,45,50,55,60,64],"Country Name","India")
 print("india/n", india)
 
