@@ -42,21 +42,34 @@ countries=[35,40,55,81,109,119,202,205,251]
 population_c,population_y =dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Population, total")
 Green_gas_c,Green_gas_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Total greenhouse gas emissions (kt of CO2 equivalent)")
 co2_c,co2_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","CO2 emissions (kt)")
-gdp_c,gdp_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Foreign direct investment, net inflows (% of GDP)")
+Up_c,Up_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv",years,countries,"Indicator Name","Urban population")
 india = stats_f("API_19_DS2_en_csv_v2_4700503.csv",[3,35,40,45,50,55,60,64],"Country Name","India")
 print("india/n", india)
 
 
 
 def plot_p(DataFrame, col, types, name):
-    DataFrame.plot(x=col, rot=45, figsize=(20,10), kind= types, title= name)
+    DataFrame.plot(x=col, rot=45, figsize=(50,25), kind= types, title= name)
+    ax.legend(fontsize=36)
+    ax.set_title(name,pad=20, fontdict={'fontsize':40})
     return
 plot_p(population_c,"Country Name","bar","Total population")
+plt.savefig('Total population.jpg')
 plot_p(Green_gas_c,"Country Name", "bar","Total greenhouse gas emissions (kt of CO2 equivalent)")
+plt.savefig('Total greenhouse gas emissions.jpg')
 
-population_y.plot(figsize=(20,10),kind="line",title="Total population")
+ax1 = Up_y.plot(figsize=(50,25),kind="line",fontsize=36)
+ax1.set_title("Total Urban population",pad=20, fontdict={'fontsize':40})
+ax1.legend(loc=2,fontsize=26)
+plt.savefig('Total Urban population line.jpg')
+ax2 = co2_y.plot(figsize=(50,25),kind="line",fontsize=36)
+ax2.set_title("Total Co2 Emission",pad=20, fontdict={'fontsize':40})
+ax2.legend(fontsize=36)
+plt.savefig('Total Co2 Emission line.jpg')
+"""
+Up_y.plot(figsize=(20,10),kind="line",title="Total Urban Population")
 co2_y.plot(figsize=(20,10),kind="line",title="Total Co2 Emission")
-
+"""
 india.corr()
 india = india.loc[:,["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)", "Cereal yield (kg per hectare)","CO2 emissions (kt)"] ]
 print(india)
