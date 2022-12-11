@@ -49,64 +49,51 @@ print("india/n", india)
 
 
 def plot_p(DataFrame, col, types, name):
-    DataFrame.plot(x=col, rot=45, figsize=(50,25), kind= types, title= name)
+    ax=DataFrame.plot(x=col, rot=45, figsize=(50,25), kind= types, title= name,fontsize=30)
     ax.legend(fontsize=36)
     ax.set_title(name,pad=20, fontdict={'fontsize':40})
     return
+
 plot_p(population_c,"Country Name","bar","Total population")
 plt.savefig('Total population.jpg')
 plot_p(Green_gas_c,"Country Name", "bar","Total greenhouse gas emissions (kt of CO2 equivalent)")
 plt.savefig('Total greenhouse gas emissions.jpg')
 
 legend_properties = {'weight':'bold','size':36}
-ax1 = Up_y.plot(figsize=(50,25),kind="line",fontsize=36,linewidth=4.0)
+ax1 = Up_y.plot(figsize=(60,30),kind="line",fontsize=36,linewidth=4.0)
 ax1.set_title("Total Urban population",pad=20, fontdict={'fontsize':40})
 ax1.legend(loc=2,prop=legend_properties)
 plt.savefig('Total Urban population line.jpg')
 
 
-ax2 = co2_y.plot(figsize=(50,25),kind="line",fontsize=36,linewidth=4.0)
+ax2 = co2_y.plot(figsize=(60,30),kind="line",fontsize=36,linewidth=4.0)
 ax2.set_title("Total Co2 Emission",pad=30, fontdict={'fontsize':40})
 ax2.legend(prop=legend_properties)
 plt.savefig('Total Co2 Emission line.jpg')
-"""
-Up_y.plot(figsize=(20,10),kind="line",title="Total Urban Population")
-co2_y.plot(figsize=(20,10),kind="line",title="Total Co2 Emission")
-"""
-india.corr()
-india = india.loc[:,["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)", "CO2 emissions (kt)"] ]
-print(india)
+x=["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","CO2 emissions (kt)"]
+india = india.loc[:,x ]
 
 print(india.corr())
-'''
-india.corr(). style. background_gradient (cmap = 'GnBu')
+def heatMap(value2, colours,title_name):
 
-plt.figure(figsize=(50,25))
-plt.imshow( india.corr(), interpolation = 'nearest',cmap="GnBu");
-
-plt.title('Heat map for India',fontsize=46)
-plt.xticks([0, 1, 2,3,4], ["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","Cereal yield (kg per hectare)","CO2 emissions (kt)"],rotation=90,fontsize=46)
-plt.yticks([0, 1, 2,3,4], ["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","Cereal yield (kg per hectare)","CO2 emissions (kt)"],fontsize=46)
-plt.show()
-'''
-fig, ax = plt.subplots( figsize=(10,10))
-im = ax.imshow(india.corr(),cmap="YlOrBr")
-cbar = ax.figure.colorbar(im,
-                          ax = ax,
-                          shrink=0.5 )
-x=["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","CO2 emissions (kt)"]
-# add tick labels
-ax.set_xticks(np.arange(len(x)),
-              labels=x,
-              size=12)
-ax.set_yticks(np.arange(len(x)),
-              labels=x,size=12)
-# Rotate the tick labels to be more legible
-plt.setp(ax.get_xticklabels(),
-         rotation = 45,
-         ha = "right",
-         rotation_mode = "anchor")
-ax.set_title("India's Heatmap", size=20)
-fig.tight_layout()
-plt.savefig("inda's Heatmap.png",
+    fig, ax = plt.subplots( figsize=(20,20))
+    im = ax.imshow(value2,cmap=colours)
+    cbar = ax.figure.colorbar(im,
+                              ax = ax,
+                              shrink=0.85 )
+    # add tick labels
+    ax.set_xticks(np.arange(len(x)),
+                  labels=x,
+                  size=20)
+    ax.set_yticks(np.arange(len(x)),
+                  labels=x,size=12)
+    # Rotate the tick labels to be more legible
+    plt.setp(ax.get_xticklabels(),
+             rotation = 90,
+             ha = "right",
+             rotation_mode = "anchor")
+    ax.set_title(title_name, size=12)
+    fig.tight_layout()
+    plt.savefig(title_name+".png",
                     format='png',dpi=150)
+heatMap(india.corr(),"YlOrBr","India's Heatmap")
