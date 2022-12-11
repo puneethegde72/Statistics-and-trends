@@ -106,12 +106,14 @@ plt.savefig('Total Co2 Emission line.jpg')
 x=["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","CO2 emissions (kt)"]
 # filtering the columns and rows as per the heatmap requirement
 india = india.loc[:,x ]
-
+# corilation usied in heatmap the heatmap
 print(india.corr())
+"""Function to create a heatmap using matplotlib"""
 def heatMap(value2, colours,title_name):
-
     fig, ax = plt.subplots( figsize=(20,20))
+    #creating a Heat plot
     im = ax.imshow(value2,cmap=colours)
+    #creating a Heat plot bar for more data accuracy
     cbar = ax.figure.colorbar(im,
                               ax = ax,
                               shrink=0.85 )
@@ -128,6 +130,9 @@ def heatMap(value2, colours,title_name):
              rotation_mode = "anchor")
     ax.set_title(title_name, size=12)
     fig.tight_layout()
+    #saving Heatmap
     plt.savefig(title_name+".png",
                     format='png',dpi=150)
+    return
+#Calling a function to create a heatmap
 heatMap(india.corr(),"YlOrBr","India's Heatmap")
