@@ -8,8 +8,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import scipy as sts
-import plotly.express as px
-import seaborn as sns
 """Readng manupulating file with country name
 and returning a dataframe and transpose of the dataframe as return"""
 def dataFrame(file_name,years,countries,col, value1):
