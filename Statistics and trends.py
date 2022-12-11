@@ -10,28 +10,44 @@ import matplotlib.pyplot as plt
 import scipy as sts
 import plotly.express as px
 import seaborn as sns
-"""Readng manupulating file and returning a dataframe and transpose of the dataframe"""
+"""Readng manupulating file with country name
+and returning a dataframe and transpose of the dataframe as return"""
 def dataFrame(file_name,years,countries,col, value1):
+    # Reading Data for dataframe
     df= pd.read_csv(file_name, skiprows=4)
+    # Grouping data with col value
     df1=df.groupby(col, group_keys= True)
+    #retriving the data with the all the grouped by element
     df1= df1.get_group(value1)
+    #Reseting the index of the dataframe
     df1 = df1.reset_index()
+    #Storing the coloumn data in a variable
     a = df1['Country Name']
+    # croping the data from data frame
     df1= df1.iloc[countries,years]
     df1.insert(loc=0, column='Country Name', value=a)
+    #Droping the NAN values from daraframe Coloumn wise
     df1= df1.dropna(axis = 1)
+    #transposing the index of the dataframe
     df2 = df1.set_index('Country Name').T
+    #returning the normal dataframe and transposed dataframe
     return df1,df2
-
+'''Reading a dataframe with multiple indicator name and returing a dataframe
+where dataframe will be used for the Heat Map '''
 def stats_f(file_name,years,col, value1):
+    # Reading Data for dataframe
     df= pd.read_csv(file_name, skiprows=4)
+    # Grouping data with col value
     df1=df.groupby(col, group_keys= True)
+    #retriving the data with the all the grouped by element
     df1= df1.get_group(value1)
+    #Reseting the index of the dataframe
     df1 = df1.reset_index()
+    # croping the data from data frame
     df1= df1.iloc[:,years]
-    #df1.insert(loc=0, column='Country Name', value=a)
-    #df1.to_csv("C:/Users/Puneet/OneDrive/Documents/india.csv")
+    #Droping the NAN values from daraframe Coloumn wise
     df1= df1.dropna(axis = 0)
+    #Droping the NAN values from daraframe Row wise
     df1= df1.dropna(axis = 1)
     df2 = df1.set_index("Indicator Name").T
     #df2.columns=df2.iloc[0]
