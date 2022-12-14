@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import scipy as sts
-"""Readng manupulating file with country name
+"""Reading manipulating file with country name
 and returning a dataframe and transpose of the dataframe as return"""
 def dataFrame(file_name, years, countries, col, value1):
     # Reading Data for dataframe
@@ -19,36 +19,37 @@ def dataFrame(file_name, years, countries, col, value1):
     df1 = df1.get_group(value1)
     #Reseting the index of the dataframe
     df1 = df1.reset_index()
-    #Storing the coloumn data in a variable
+    #Storing the column data in a variable
     a = df1['Country Name']
-    # croping the data from data frame
+    # cropping the data from data frame
     df1 = df1.iloc[countries, years]
     df1.insert(loc=0, column='Country Name', value=a)
-    #Droping the NAN values from daraframe Coloumn wise
+    #Dropping the NAN values from dartframe Column wise
     df1= df1.dropna(axis = 1)
     #transposing the index of the dataframe
     df2 = df1.set_index('Country Name').T
     #returning the normal dataframe and transposed dataframe
     return df1, df2
-'''Reading a dataframe with multiple indicator name and returing a dataframe
+'''Reading a dataframe with multiple indicator name and returning a dataframe
 where dataframe will be used for the Heat Map '''
 def stats_f(file_name, years, col, value1):
     # Reading Data for dataframe
     df = pd.read_csv(file_name, skiprows=4)
     # Grouping data with col value
     df1 = df.groupby(col, group_keys= True)
-    #retriving the data with the all the grouped by element
+    #retriving the data with the all the group_by element
     df1 = df1.get_group(value1)
-    #Reseting the index of the dataframe
+    #Resetting the index of the dataframe
     df1 = df1.reset_index()
-    # croping the data from data frame
+    # cropping the data from dataframe
     df1 = df1.iloc[:,years]
-    #Droping the NAN values from daraframe Coloumn wise
+    #Dropping the NAN values from dataframe Columnwise
     df1 = df1.dropna(axis = 0)
-    #Droping the NAN values from daraframe Row wise
+    #Dropping the NAN values from dataframe Rowwise
     df1 = df1.dropna(axis = 1)
     #transposing the index of the dataframe
     df2 = df1.set_index("Indicator Name").T
+    df2 = df2.rename_axis(None, axis=1)
     #returning dataframe requred for Heatmap
     return df2
 # years using for the data analysis
@@ -67,9 +68,9 @@ Up_c, Up_y = dataFrame("API_19_DS2_en_csv_v2_4700503.csv", years,
                       countries, "Indicator Name", "Urban population")
 india = stats_f("API_19_DS2_en_csv_v2_4700503.csv", [3,35,40,45,50,55,60,64],
                 "Country Name", "India")
-'''with this function Ploting a bar graph using pandas ploting meathod'''
+'''with this function Plotting a bar graph using pandas plotting method'''
 def plot_p(DataFrame, col, types, name):
-    #ploting graph with the parameater which given in the function
+    #plotting graph with the parameter which given in the function
     ax = DataFrame.plot(x=col, rot=45, figsize=(50,25),
                       kind= types, title= name, fontsize=30)
     #setting legend font size
@@ -77,7 +78,7 @@ def plot_p(DataFrame, col, types, name):
     #setting Title and font size for a plot
     ax.set_title(name, pad=20, fontdict={'fontsize':40})
     return
-# ploting the bar graph1
+# plotting the bar graph1
 plot_p(population_c, "Country Name", "bar", "Total population")
 # Saving plot
 plt.savefig('Total population.jpg')
@@ -85,7 +86,7 @@ plot_p(Green_gas_c, "Country Name", "bar", "Total greenhouse gas emissions (kt o
 plt.savefig('Total greenhouse gas emissions.jpg')
 
 legend_properties = {'weight':'bold', 'size':36}
-# ploting the bar graph-2
+# plotting the bar graph-2
 ax1 = Up_y.plot(figsize=(60,30), kind="line", fontsize=36, linewidth=4.0)
 #setting a title for the graph
 ax1.set_title("Total Urban population", pad=20, fontdict={'fontsize':40})
@@ -101,18 +102,19 @@ ax2.set_title("Total Co2 Emission", pad=30, fontdict={'fontsize':40})
 ax2.legend(prop=legend_properties)
 # Saving plot
 plt.savefig('Total Co2 Emission line.jpg')
-# creating a variable x for Heat Map
+# creating a variable x for HeatMap
 x=["Population, total","Urban population","Foreign direct investment, net inflows (% of GDP)","CO2 emissions (kt)"]
 # filtering the columns and rows as per the heatmap requirement
 india = india.loc[:,x ]
-# corilation usied in heatmap the heatmap
-print(india.corr())
+# correlation usied in heatmap the heatmap
+correlation= india.corr()
+print(correlation)
 """Function to create a heatmap using matplotlib"""
-def heatMap(value2, colours, title_name):
+def heatMap(value2, colours, title_name,x):
     fig, ax = plt.subplots( figsize=(20,20))
-    #creating a Heat plot
+    #creating a Heatplot
     im = ax.imshow(value2, cmap=colours)
-    #creating a Heat plot bar for more data accuracy
+    #creating a Heatplot bar for more data accuracy
     cbar = ax.figure.colorbar(im,
                               ax = ax,
                               shrink=0.85 )
@@ -134,4 +136,4 @@ def heatMap(value2, colours, title_name):
                     format ='png', dpi = 150)
     return
 #Calling a function to create a heatmap
-heatMap(india.corr(), "YlOrBr", "India's Heatmap")
+heatMap(correlation, "YlOrBr", "India's Heatmap",x)
