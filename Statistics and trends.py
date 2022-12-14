@@ -15,16 +15,16 @@ def dataFrame(file_name, years, countries, col, value1):
     df = pd.read_csv(file_name, skiprows = 4)
     # Grouping data with col value
     df1 = df.groupby(col, group_keys = True)
-    #retriving the data with the all the grouped by element
+    #retriving the data with the all the group element
     df1 = df1.get_group(value1)
     #Reseting the index of the dataframe
     df1 = df1.reset_index()
     #Storing the column data in a variable
     a = df1['Country Name']
-    # cropping the data from data frame
+    # cropping the data from dataframe
     df1 = df1.iloc[countries, years]
     df1.insert(loc=0, column='Country Name', value=a)
-    #Dropping the NAN values from dartframe Column wise
+    #Dropping the NAN values from dataframe Column wise
     df1= df1.dropna(axis = 1)
     #transposing the index of the dataframe
     df2 = df1.set_index('Country Name').T
@@ -50,7 +50,7 @@ def stats_f(file_name, years, col, value1):
     #transposing the index of the dataframe
     df2 = df1.set_index("Indicator Name").T
     df2 = df2.rename_axis(None, axis=1)
-    #returning dataframe requred for Heatmap
+    #returning dataframe required for Heatmap
     return df2
 # years using for the data analysis
 years = [35, 40, 45, 50, 55, 60, 64]
